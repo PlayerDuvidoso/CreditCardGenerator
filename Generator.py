@@ -59,7 +59,7 @@ class CC():
         end_year = datetime.now().year + 3,
         start = None,
         end = None,
-        pattern = "%m-%Y")
+        pattern = "%m-%y")
     
   def generate_cc_cvv(self):
     '''Generates a type-specific CVV number.
@@ -108,60 +108,27 @@ class CC():
             'cc_cvv': self.cc_cvv,
             'cc_exp': self.cc_exp}
 
-  def print_new_card(self):
-    '''Prints a single card to console.
-    '''
-    hr = '--------------------------------'
-
-    print(f'%s' % hr)
-    print(f'Type: %s' % self.cc_type)
-    print(f'Number: %s' % self.cc_num)
-    print(f'CVV: %s' % self.cc_cvv)
-    print(f'Exp: %s' % self.cc_exp)
-
 
 class CCNumGen(): 
   '''Generates theoretically valid credit card numbers
   with CVV and expiration date. Prints a list of dictionaries. 
   '''
-  hr = '--------------------------------'
-
+  
   card_types = ['amex','discover','mc','visa13','visa16']
-
+  
   def __init__(self, type='visa16', number=1):
 
     self.type = type
     self.num = number
     self.card_list = []
 
-    if self.type not in self.card_types:
-      print('Card type not recognized. Task ended.')
-      return
-    if not isinstance(self.num, int):
-      print('Number of cards must be a whole number. Task ended.')
-      return
-
-    print(self.hr)
-    print(f'Generating %s %s cards...' % (self.num, self.type))
-
-    for x_ in range(0, self.num):
-      new = CC()
-      new.cc_type = self.type
-      new.generate_cc_exp()
-      new.generate_cc_cvv()
-      new.generate_cc_prefill()
-      new.generate_cc_num()
-      self.card_list.append(new.return_new_card())
-      new.print_new_card()
-
-    print(self.hr)
-    print('Task complete.')
-    print(self.hr)
-
-  def print_card_list(self):
-    '''Prints the list of cards to console.
-    '''
-    for d in self.card_list:
-      print('------------------------------')
-      for k in d:
-        print(f'%s: %s' % (k, d[k]))
+    new = CC()
+    new.cc_type = self.type
+    new.generate_cc_exp()
+    new.generate_cc_cvv()
+    new.generate_cc_prefill()
+    new.generate_cc_num()
+    self.card_list.append(new.return_new_card())
+    self.num = new.cc_num
+    self.cvv = new.cc_cvv
+    self.exp = new.cc_exp.replace('-','/')
