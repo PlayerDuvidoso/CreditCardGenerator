@@ -62,27 +62,27 @@ def main(page: ft.Page):
             ft.Divider(height=10, opacity=0),
             ft.ElevatedButton(text='Generate', style=ft.ButtonStyle(bgcolor='#D35400', color='#ECF0F1', overlay_color=ft.colors.ORANGE_900), width=180, height=40, on_click=generate)
         ])),
-                                                                                                                                            ft.Container(padding=ft.padding.only(top=30, left=30, right=30), bgcolor='#ECF0F1', width=540, height=600, content=ft.Column(spacing=12, horizontal_alignment='center', controls=[
-                                                                                                                                                ft.Text('RESULTS', color='#D35400', size=18, weight=ft.FontWeight.W_500),
-                                                                                                                                                ft.Divider(height=0),
-                                                                                                                                                ft.Divider(height=143, opacity=0),
-                                                                                                                                                ft.Row(spacing=5, visible=False, alignment='center', controls=[
-                                                                                                                                                    ft.IconButton(icon=ft.icons.ARROW_LEFT, icon_size=50, scale=1, on_click=previousCard),
-                                                                                                                                                    ft.Container(padding=ft.padding.all(15), width=225, height=165, border_radius=20, gradient=ft.LinearGradient(colors=['#2C3E50', '#34495E'], rotation=-90), content=ft.Column(controls=[
-                                                                                                                                                        ft.Text(value='VISA', weight=ft.FontWeight.BOLD, size=16),
-                                                                                                                                                        ft.Divider(opacity=0, height=50),
-                                                                                                                                                        ft.Row(alignment=ft.MainAxisAlignment.SPACE_BETWEEN, controls=[
-                                                                                                                                                            ft.Text('4539398883228199', size=12, selectable=True),
-                                                                                                                                                            ft.Text('07/28', size=12, selectable=True)
-                                                                                                                                                        ]),
-                                                                                                                                                        ft.Row(alignment=ft.MainAxisAlignment.SPACE_BETWEEN, controls=[
-                                                                                                                                                            ft.Text('Benedict Hudson', size=12, selectable=True),
-                                                                                                                                                            ft.Text('728', size=12, selectable=True)
-                                                                                                                                                        ])
-                                                                                                                                                    ])),
-                                                                                                                                                    ft.IconButton(icon=ft.icons.ARROW_RIGHT, icon_size=50, scale=1, on_click=nextCard)]),
-                                                                                                                                                ft.Text(value='0/0', size=12, color='#000000', visible=False)
-                                                                                                                                                ]))]))]))
+            ft.Container(padding=ft.padding.only(top=30, left=30, right=30), bgcolor='#ECF0F1', width=540, height=600, content=ft.Column(spacing=12, horizontal_alignment='center', controls=[
+                ft.Text('RESULTS', color='#D35400', size=18, weight=ft.FontWeight.W_500),
+                ft.Divider(height=0),
+                ft.Divider(height=143, opacity=0),
+                ft.Row(spacing=5, visible=False, alignment='center', controls=[
+                    ft.IconButton(icon=ft.icons.ARROW_LEFT, icon_size=50, scale=1, on_click=previousCard),
+                    ft.Container(padding=ft.padding.all(15), width=225, height=165, border_radius=20, gradient=ft.LinearGradient(colors=['#2C3E50', '#34495E'], rotation=-90), content=ft.Column(controls=[
+                        ft.Text(value='VISA', weight=ft.FontWeight.BOLD, size=16),
+                        ft.Divider(opacity=0, height=50),
+                        ft.Row(alignment=ft.MainAxisAlignment.SPACE_BETWEEN, controls=[
+                            ft.Text('4539398883228199', size=12, selectable=True),
+                            ft.Text('07/28', size=12, selectable=True)
+                        ]),
+                        ft.Row(alignment=ft.MainAxisAlignment.SPACE_BETWEEN, controls=[
+                            ft.Text('Benedict Hudson', size=12, selectable=True),
+                            ft.Text('728', size=12, selectable=True)
+                        ])
+                    ])),
+                    ft.IconButton(icon=ft.icons.ARROW_RIGHT, icon_size=50, scale=1, on_click=nextCard)]),
+                ft.Text(value='0/0', size=12, color='#000000', visible=False)
+                ]))]))]))
     generator_container = page.controls[0].controls[0].content.controls[0].content
     generator_amount = generator_container.controls[4]
     generator_brand = generator_container.controls[3]
