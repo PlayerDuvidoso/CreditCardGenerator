@@ -1,15 +1,14 @@
 import random
 from randomtimestamp import randomtimestamp
 from datetime import datetime
+from faker import Faker
 
 
 class CC():
   '''Individual card info and methods.
   '''
-
-
   CCDATA = {
-    'amex': {
+    'AMERICAN EXPRESS': {
       'len_num': 15,
       'len_cvv': 4,
       'pre': [34, 37],
@@ -21,7 +20,7 @@ class CC():
       'pre': [6001],
       'remaining': 12
     },
-    'mc': {
+    'MASTERCARD': {
       'len_num': 16,
       'len_cvv': 3,
       'pre': [51, 55],
@@ -33,7 +32,7 @@ class CC():
       'pre': [4],
       'remaining': 12
     },
-    'visa16': {
+    'VISA': {
       'len_num': 16,
       'len_cvv': 3,
       'pre': [4],
@@ -47,6 +46,7 @@ class CC():
     self.cc_num = None
     self.cc_cvv = None
     self.cc_exp = None
+    self.cc_holder = None
     self.cc_prefill = []
 
   def generate_cc_exp(self):
@@ -59,7 +59,7 @@ class CC():
         end_year = datetime.now().year + 3,
         start = None,
         end = None,
-        pattern = "%m-%y")
+        pattern = "%m/%y")
     
   def generate_cc_cvv(self):
     '''Generates a type-specific CVV number.
@@ -99,6 +99,12 @@ class CC():
 
     temp = working + [10 - (check_sum % 10)]
     self.cc_num = "".join(map(str,temp)) 
+    
+  def generate_cc_holder(self):
+    '''Generates a random name as the card holder.
+    '''
+    fake = Faker()
+    self.cc_holder = fake.name()
 
   def return_new_card(self):
     '''Returns a dictionary of card details.
@@ -106,7 +112,8 @@ class CC():
     return {'cc_type': self.cc_type,
             'cc_num': self.cc_num, 
             'cc_cvv': self.cc_cvv,
-            'cc_exp': self.cc_exp}
+            'cc_exp': self.cc_exp,
+            'cc_holder': self.cc_holder}
 
 
 class CCNumGen(): 
@@ -114,9 +121,9 @@ class CCNumGen():
   with CVV and expiration date. Prints a list of dictionaries. 
   '''
   
-  card_types = ['amex','discover','mc','visa13','visa16']
+  card_types = ['AMERICAN EXPRESS','discover','MASTERCARD','visa13','VISA']
   
-  def __init__(self, type='visa16', number=1):
+  def __init__(self, type='VISA', number=1):
 
     self.type = type
     self.num = number
@@ -128,7 +135,5 @@ class CCNumGen():
     new.generate_cc_cvv()
     new.generate_cc_prefill()
     new.generate_cc_num()
+    new.generate_cc_holder()
     self.card_list.append(new.return_new_card())
-    self.num = new.cc_num
-    self.cvv = new.cc_cvv
-    self.exp = new.cc_exp.replace('-','/')
